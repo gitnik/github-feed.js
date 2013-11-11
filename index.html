@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width">
+  	<title>therealplayer1.com - github feed</title>
+</head>
+<body>
+	<div id="githubContainer">
+	</div>
+
+
+	<script type="text/html" id="PushEvent-tmpl">
+	<div>
+		<div id="time" class="time"></div>
+		<div id="msg">
+			<a href="#" id="user" class="user"></a> pushed to 
+			<a href="#" id="head" class="head"></a> at <a href="#" id="repo" class="repo"></a>
+		</div>
+		<div id="commitTmpl" class="commitTmpl">
+			<a href="#" id="commit" class="commit"></a>
+		</div>
+	</div>
+	</script>
+	<script src="promise.js"></script>
+	<script src="github-feed.js"></script>
+	<script type="text/javascript">
+		GITHUB.FEED();
+	</script>
+</body>
+</html>
