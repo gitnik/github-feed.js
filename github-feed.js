@@ -116,7 +116,7 @@ var GITHUB = function(){
 			// only continue if the event type is supported
 			if(	(_events.indexOf(data[i].type) != -1) &&
 				// the user specified the event in the options 
-				(_config.typeOfEvents.indexof(data[i].type) != -1) &&
+				(_config.typeOfEvents.toString().indexOf(data[i].type) != -1) &&
 				// and we haven't reached the maximum number of events yet
 				(relevantEvents < _config.numberOfEvents)) {
 
