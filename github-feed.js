@@ -1,7 +1,7 @@
 var GITHUB = function(){
 
 	var _events = ["PushEvent"]; // we only support this single event at the moment
-								 // more might be added later on
+				     // more might be added later on
 
 	var _config = {
 		// internal config options
@@ -67,7 +67,7 @@ var GITHUB = function(){
 		}
 
 		// if the the cached feed is older than "_config.cacheTime()", we'll return false and reload it from github
-		return JSON.parse(localStorage["feed_"+_config.user])[0].fetched_at + _config.cacheTime() > Date.now();
+		return JSON.parse(localStorage["feed_"+_config.user])[0].fetched_at + _config.cacheTime()*1000 > Date.now();
 	}
 
 	function _getFeedFromCache() {
