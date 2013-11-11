@@ -11,7 +11,6 @@ Key features are:
 
 
 ### getting the script running
-
 ```html
 <!DOCTYPE html>
 <head>
