@@ -8,6 +8,9 @@ Key features are:
 * small size
 * no dependencies (expect for parts of [promise.js](https://github.com/stackp/promisejs), which are included)
 * speed (thanks to caching and script templates) 
+ 
+
+A [demo](http://therealplayer1.com/#) is available on my website
 
 
 ### getting the script running
