@@ -5,63 +5,90 @@ A simple and pretty small script that fetches a users github activity feed and o
 
 Key features are:
 * highly customizable
-* small size
 * no dependencies (expect for parts of [promise.js](https://github.com/stackp/promisejs), which are included)
 * speed (thanks to caching and script templates) 
- 
 
-A [demo](http://therealplayer1.com/#) is available on my website
+
+A [demo](https://justnik.io) is available on my website
 
 
 ### getting the script running
 ```html
 <!DOCTYPE html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width">
+  	<style type="text/css">
+  		#myContainer #msg {
+  		 	font-weight: bold;
+  			font-size: 15px;
+  		 }
+
+  		 #myContainer #commitTmpl {
+  		 	padding-top: 5px;
+  		 	font-size: 11px;
+  		 	font-style: italic;
+  		 }
+
+  		 #myContainer .panel {
+  		 	font-family: "Helvetica Neue", sans-serif;
+  			padding: 0.8em;
+  			margin-bottom: 0.5em;
+  			border-radius: 7px;
+  			border-style: solid;
+  			border-width: 1px;
+  			border-color: #d9d9d9;
+  			margin-bottom: 1.25em;
+  			padding: 1.25em;
+  			background: #f2f2f2;
+  			width: 200px;
+  		 }
+  	</style>
+  	<title>github feed</title>
 </head>
 <body>
-	<div id="githubContainer">
+	<div id="myContainer">
 	</div>
 
-	<!--- template for the currently only supported event. more will be added later on -->
- 	<script type="text/html" id="PushEvent-tmpl">
-		<h5><small><div id="time" class="time"></div></h5></small>
-		<div id="msg">
-			<a href="#" id="user" class="user"></a> pushed to 
-			<a href="#" id="head" class="head"></a> at <a href="#" id="repo" class="repo"></a>
-		</div>
-		<div id="commitTmpl" class="commitTmpl">
-			<a href="#" id="commit" class="commit"></a>
-		</div>
-  	</script>
-  	<script src="promise.js"></script>
-  	<script src="github-feed.js"></script>
-  	<script type="text/javascript">
-  	
-  	// In order to make the usage of the script as easy as possible, 
-	// there's only a single publicly available function, called "FEED"
-	
-  	var options = {
-  		// your github name
-  		'user': 'gitnik', 
-  		
-  		// how many events do you want to show (default: 5)
-		'numberOfEvents': 5,
-		
-		// the container for the feed
-		'container': 'githubContainer', 
-		
-		// here you can specify classes that you want to be added to the templates
-		'containerClasses': '',  
-		
-		// which of events do you want to see? currently supported events are: "PushEvent"
-		'typeOfEvents': ["PushEvent"], 
-		
-		// how long (how many seconds) do you want to store the feed in user's cache? (default: one day)
-		cacheTime(60*60*24) 
-	}
-  	
-  	
-  	GITHUB.FEED(options);
-  	</script>
+
+	<script type="text/html" id="PushEvent-tmpl">
+	    <h5><small><div id="time" class="time">{{date}}</div></small></h5>
+	    <div id="msg">
+	        <a href="{{userUrl}}">{{user}}</a> pushed to
+	        <a href="{{refUrl}}">{{ref}}</a> at <a href="{{repoUrl}}">{{repo}}</a>
+	    </div>
+	    <div id="commitTmpl" class="commitTmpl">
+	        {{commits}}
+	    </div>
+	</script>
+	<script type="text/html" id="CreateEvent-tmpl">
+	    <h5><small><div id="time" class="time">{{date}}</div></small></h5>
+	    <div id="msg">
+	        <a href="{{userUrl}}">{{user}}</a> created {{actualText}}
+	        <!--
+	            I dont want to implement any logic inside the parser,
+	            hence we will just do it in the respective class.
+	            in this case this mean CreateEvent.js
+	        -->
+	    </div>
+	</script>
+	<script src="js/promise.js"></script>
+	<script src="js/events/functions.js"></script>
+	<script src="js/events/PushEvent.js"></script>
+	<script src="js/events/CreateEvent.js"></script>
+	<script src="js/eventFactory.js"></script>
+	<script src="js/github-feed.js"></script>
+	<script type="text/javascript">
+		var options = {
+			user: 'gitnik',
+			numberOfEvents: 10,
+			container: 'myContainer',
+			containerClasses: ["panel"]
+		};
+
+		GITHUB.FEED(options);
+	</script>
 </body>
+</html>
+

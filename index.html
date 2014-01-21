@@ -3,29 +3,75 @@
 <head>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width">
-  	<title>therealplayer1.com - github feed</title>
+  	<style type="text/css">
+  		#myContainer #msg {
+  		 	font-weight: bold;
+  			font-size: 15px;
+  		 }
+
+  		 #myContainer #commitTmpl {
+  		 	padding-top: 5px;
+  		 	font-size: 11px;
+  		 	font-style: italic;
+  		 }
+
+  		 #myContainer .panel {
+  		 	font-family: "Helvetica Neue", sans-serif;
+  			padding: 0.8em;
+  			margin-bottom: 0.5em;
+  			border-radius: 7px;
+  			border-style: solid;
+  			border-width: 1px;
+  			border-color: #d9d9d9;
+  			margin-bottom: 1.25em;
+  			padding: 1.25em;
+  			background: #f2f2f2;
+  			width: 200px;
+  		 }
+  	</style>
+  	<title>github feed</title>
 </head>
 <body>
-	<div id="githubContainer">
+	<div id="myContainer">
 	</div>
 
 
 	<script type="text/html" id="PushEvent-tmpl">
-	<div>
-		<div id="time" class="time"></div>
-		<div id="msg">
-			<a href="#" id="user" class="user"></a> pushed to 
-			<a href="#" id="head" class="head"></a> at <a href="#" id="repo" class="repo"></a>
-		</div>
-		<div id="commitTmpl" class="commitTmpl">
-			<a href="#" id="commit" class="commit"></a>
-		</div>
-	</div>
+	    <h5><small><div id="time" class="time">{{date}}</div></small></h5>
+	    <div id="msg">
+	        <a href="{{userUrl}}">{{user}}</a> pushed to
+	        <a href="{{refUrl}}">{{ref}}</a> at <a href="{{repoUrl}}">{{repo}}</a>
+	    </div>
+	    <div id="commitTmpl" class="commitTmpl">
+	        {{commits}}
+	    </div>
 	</script>
-	<script src="promise.js"></script>
-	<script src="github-feed.js"></script>
+	<script type="text/html" id="CreateEvent-tmpl">
+	    <h5><small><div id="time" class="time">{{date}}</div></small></h5>
+	    <div id="msg">
+	        <a href="{{userUrl}}">{{user}}</a> created {{actualText}}
+	        <!--
+	            I dont want to implement any logic inside the parser,
+	            hence we will just do it in the respective class.
+	            in this case this mean CreateEvent.js
+	        -->
+	    </div>
+	</script>
+	<script src="js/promise.js"></script>
+	<script src="js/events/functions.js"></script>
+	<script src="js/events/PushEvent.js"></script>
+	<script src="js/events/CreateEvent.js"></script>
+	<script src="js/eventFactory.js"></script>
+	<script src="js/github-feed.js"></script>
 	<script type="text/javascript">
-		GITHUB.FEED();
+		var options = {
+			user: 'gitnik',
+			numberOfEvents: 10,
+			container: 'myContainer',
+			containerClasses: ["panel"]
+		};
+
+		GITHUB.FEED(options);
 	</script>
 </body>
 </html>
