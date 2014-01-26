@@ -1,5 +1,6 @@
-function CreateEvent(data){
+function CreateEvent(data, config){
     this.data = data;
+    this.config = config;
 }
 
 CreateEvent.prototype.getData = function() {
@@ -15,10 +16,12 @@ CreateEvent.prototype.getData = function() {
 
 
 CreateEvent.prototype.handleHtmlBasedOnBranchOrRepository = function() {
-    if(this.data.payload.ref == null)
+    if(this.data.payload.ref_type == "repository")
         return this.handleHtmlRepository();
-    else
+    else if(this.data.payload.ref_type == "branch")
         return this.handleHtmlBranch();
+    else
+        return;
 }
 
 CreateEvent.prototype.handleHtmlBranch = function() {

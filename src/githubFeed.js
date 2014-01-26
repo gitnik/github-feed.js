@@ -1,6 +1,6 @@
 var GITHUB = function () {
 
-    var _events = ["PushEvent", "CreateEvent"];
+    var _events = ["PushEvent", "CreateEvent", "IssueCommentEvent", "WatchEvent"];
 
     var _config = {
         // internal config options
@@ -11,7 +11,7 @@ var GITHUB = function () {
         'numberOfEvents':   5,
         'container':        'githubContainer', // the container for the feed
         'containerClasses': [], // want to have any classes added to your container?
-        'typeOfEvents':     ["PushEvent", "CreateEvent"], // which of events do you want to see?
+        'typeOfEvents':     ["PushEvent", "CreateEvent", "IssueCommentEvent", "WatchEvent"], // which of events do you want to see?
         cacheTime:          function (seconds) {
             var seconds = seconds || 86400;
             return (_config.debug) ? 0 : seconds; // default cacheTime is one day, unless we're in active development
@@ -21,7 +21,7 @@ var GITHUB = function () {
     // the main method
     function feed(options) {
 
-        // substitude the default config with the user-given options
+        // substitute the default config with the user-given options
         for (var prop in options) {
             if (options.hasOwnProperty(prop)) {
                 _config[prop] = options[prop];
@@ -120,7 +120,7 @@ var GITHUB = function () {
                 (relevantEvents < _config.numberOfEvents)) {
 
                 // let's polish up the data
-                var event = new EventFactory(data[i], _config.containerClasses);
+                var event = new EventFactory(data[i], _config);
                 var eventTemplate = event.getTemplate();
 
                 // and fill the template with them
