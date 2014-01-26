@@ -6,7 +6,7 @@ A simple and pretty small script that fetches a users github activity feed and o
 Key features are:
 * highly customizable
 * no dependencies (expect for parts of [promise.js](https://github.com/stackp/promisejs), which are included)
-* speed (thanks to caching and script templates) 
+* speed (thanks to caching and script templates)
 
 
 A [demo](https://justnik.io) is available on my website
@@ -73,12 +73,14 @@ A [demo](https://justnik.io) is available on my website
 	        -->
 	    </div>
 	</script>
-	<script src="js/promise.js"></script>
-	<script src="js/events/functions.js"></script>
-	<script src="js/events/PushEvent.js"></script>
-	<script src="js/events/CreateEvent.js"></script>
-	<script src="js/eventFactory.js"></script>
-	<script src="js/github-feed.js"></script>
+	<script src="src/promise.js"></script>
+    <script src="src/events/functions.js"></script>
+    <script src="src/events/PushEvent.js"></script>
+    <script src="src/events/CreateEvent.js"></script>
+    <script src="src/events/IssueCommentEvent.js"></script>
+    <script src="src/events/WatchEvent.js"></script>
+    <script src="src/eventFactory.js"></script>
+    <script src="src/githubFeed.js"></script>
 	<script type="text/javascript">
 		var options = {
 			user: 'gitnik',
