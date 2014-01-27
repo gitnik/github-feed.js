@@ -53,26 +53,42 @@ A [demo](https://justnik.io) is available on my website
 
 
 	<script type="text/html" id="PushEvent-tmpl">
-	    <h5><small><div id="time" class="time">{{date}}</div></small></h5>
-	    <div id="msg">
-	        <a href="{{userUrl}}">{{user}}</a> pushed to
-	        <a href="{{refUrl}}">{{ref}}</a> at <a href="{{repoUrl}}">{{repo}}</a>
-	    </div>
-	    <div id="commitTmpl" class="commitTmpl">
-	        {{commits}}
-	    </div>
-	</script>
-	<script type="text/html" id="CreateEvent-tmpl">
-	    <h5><small><div id="time" class="time">{{date}}</div></small></h5>
-	    <div id="msg">
-	        <a href="{{userUrl}}">{{user}}</a> created {{actualText}}
-	        <!--
-	            I dont want to implement any logic inside the parser,
-	            hence we will just do it in the respective class.
-	            in this case this mean CreateEvent.js
-	        -->
-	    </div>
-	</script>
+        <h5><small><div class="time">{{=date}}</div></small></h5>
+        <div class="msg">
+            <a href="{{=userUrl}}">{{=user}}</a> pushed to
+            <a href="{{=refUrl}}">{{=ref}}</a> at <a href="{{=repoUrl}}">{{=repo}}</a>
+        </div>
+        <div class="commitTmpl">
+            {{=commits}}
+        </div>
+    </script>
+    <script type="text/html" id="CreateEvent-tmpl">
+        <h5><small><div class="time">{{=date}}</div></small></h5>
+        <div class="msg">
+            {{ if( payloadRefType == "branch") { }}
+                <a href="{{=userUrl}}">{{=user}}</a> created branch <a href="{{=branchUrl}}">{{=branch}}</a>
+                at <a href="{{=repoUrl}}">{{=repo}}</a>
+            {{ } else if(payloadRefType == "repository") { }}
+                <a href="{{=userUrl}}">{{=user}}</a> created repository <a href="{{=repoUrl}}">{{=repo}}</a>
+            {{ } }}
+
+        </div>
+    </script>
+    <script type="text/html" id="IssueCommentEvent-tmpl">
+        <h5><small><div class="time">{{=date}}</div></small></h5>
+        <div class="msg">
+            <a href="{{=userUrl}}">{{=user}}</a> commented on <a href="{{=issueUrl}}">{{=issue}}</a>
+        </div>
+        <div class="issueCommentTmpl">
+            <a href="{{=commentUrl}}">{{=comment}}</a>
+        </div>
+    </script>
+    <script type="text/html" id="WatchEvent-tmpl">
+        <h5><small><div class="time">{{=date}}</div></small></h5>
+        <div class="msg">
+            <a href="{{=userUrl}}">{{=user}}</a> starred <a href="{{=repoUrl}}">{{=repo}}</a>
+        </div>
+    </script>
 	<script src="src/promise.js"></script>
     <script src="src/events/functions.js"></script>
     <script src="src/events/PushEvent.js"></script>

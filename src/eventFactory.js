@@ -13,7 +13,7 @@ EventFactory.prototype.getTemplate = function()
     element.id = event['type'];
     element.className = this.config.containerClasses.join(" ");
     element.innerHTML = this.getCompiledTemplate(template, event);
-    
+
     return element;
 }
 
