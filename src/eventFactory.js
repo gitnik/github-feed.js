@@ -7,23 +7,37 @@ function EventFactory(eventData, config)
 EventFactory.prototype.getTemplate = function()
 {
     var event = this.getEventDataByType();
-
     var element = document.createElement('div');
-    element.id = event['type'];
-    element.className = this.config.containerClasses.join(" ");
     var template = document.getElementById(event.type + "-tmpl").textContent;
 
-    return this.compileTemplate(element, template, event);
+    element.id = event['type'];
+    element.className = this.config.containerClasses.join(" ");
+    element.innerHTML = this.getCompiledTemplate(template, event);
+    
+    return element;
 }
 
-EventFactory.prototype.compileTemplate = function(element, template, event) {
+EventFactory.prototype.getCompiledTemplate = function(template, event) {
 
-    element.innerHTML = template.replace(/{{(.*?)}}/g,
-        function(string, found) {
-            return event[found];
-        });
+    // taken from http://ejohn.org/blog/javascript-micro-templating
+    var fn = new Function("obj",
+        "var p=[];" +
 
-    return element;
+            // Introduce the data as local variables using with(){}
+            "with(obj){p.push('" +
+
+            // Convert the template into pure JavaScript
+            template
+                .replace(/[\r\t\n]/g, " ")
+                .split("{{").join("\t")
+                .replace(/((^|}})[^\t]*)'/g, "$1\r")
+                .replace(/\t=(.*?)}}/g, "',$1,'")
+                .split("\t").join("');")
+                .split("}}").join("p.push('")
+                .split("\r").join("\\'")
+            + "');}return p.join('');");
+
+    return fn(event);;
 }
 
 EventFactory.prototype.getEventDataByType = function() {
