@@ -12,7 +12,7 @@ PushEvent.prototype.getData = function() {
     tmpData.ref     = _getRef(this.data.payload.ref);
     tmpData.refUrl  = "https://github.com/" + this.data.repo.name;
     tmpData.repo    = _getRepo(tmpData.user, this.data.repo.name);
-    tmpData.repoUrl = _removeApiUrl(tmpData.user, this.data.repo.name);
+    tmpData.repoUrl = _removeApiUrl(this.data.repo.url);
     tmpData.commits = this.processCommits();
 
     return tmpData;

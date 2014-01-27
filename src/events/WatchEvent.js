@@ -9,7 +9,6 @@ WatchEvent.prototype.getData = function() {
     tmpData.date      = _formatTime(this.data.created_at);
     tmpData.user      = this.data.actor.login;
     tmpData.userUrl   = "https://github.com/" + tmpData.user;
-
     tmpData.repo      = this.data.repo.name;
     tmpData.repoUrl   = _removeApiUrl(this.data.repo.url);
 

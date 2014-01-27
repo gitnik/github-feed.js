@@ -14,9 +14,9 @@ function GithubFeed(config) {
         'container':        'githubContainer', // the container for the feed
         'containerClasses': [], // want to have any classes added to your container?
         'typeOfEvents':     ["PushEvent", "CreateEvent", "IssueCommentEvent", "WatchEvent"], // which of events do you want to see?
-        cacheTime:          function (seconds) {
-            var seconds = seconds || 86400;
-            return (self._config.debug) ? 0 : seconds; // default cacheTime is one day, unless we're in active development
+        'cache':            86400,
+        cacheTime:          function () {
+            return (self._config.debug) ? 0 : self._config.cache; // default cacheTime is one day, unless we're in active development
         }
     };
 
