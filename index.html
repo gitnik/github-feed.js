@@ -37,8 +37,15 @@
 	<div id="myContainer">
 	</div>
 
-    <script src="dist/githubFeed.min.js"></script>
     <script src="dist/polymer-platform.min.js"></script>
+    <script type="text/javascript" src="src/events/functions.js"></script>
+    <script type="text/javascript" src="src/events/CreateEvent.js"></script>
+    <script type="text/javascript" src="src/events/IssueCommentEvent.js"></script>
+    <script type="text/javascript" src="src/events/PushEvent.js"></script>
+    <script type="text/javascript" src="src/events/WatchEvent.js"></script>
+    <script type="text/javascript" src="src/promise.js"></script>
+    <script type="text/javascript" src="src/eventFactory.js"></script>
+    <script type="text/javascript" src="src/githubFeed.js"></script>
 	<script type="text/javascript">
         window.addEventListener('HTMLImportsLoaded', function() {
             // all imports loaded
@@ -46,7 +53,8 @@
                 "user": 'gitnik',
                 "numberOfEvents": 10,
                 "container": 'myContainer',
-                "containerClasses": ["panel"]
+                "containerClasses": ["panel"],
+                debug: true
             };
 
             new GithubFeed(options);
