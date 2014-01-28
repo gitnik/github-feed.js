@@ -1,0 +1,16 @@
+{
+    "name": "github-feed",
+    "version": "1.0.0",
+    "dependencies": {
+        "jasmine": "latest",
+    },
+    "homepage": "https://github.com/gitnik/github-feed.js",
+    "_release": "1.0.0",
+    "_resolution": {
+        "type": "version",
+        "tag": "1.0.0",
+        "commit": "ad64206a514f0d0e2cd93ae01c6deff1f97d479c"
+    },
+    "_source": "git://github.com/gitnik/github-feed.js",
+    "_target": "*"
+}
