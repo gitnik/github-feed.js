@@ -49,7 +49,6 @@ A [demo](http://technik.io) is available on my website
     <script src="dist/githubFeed.min.js"></script>
 
     <script src="lib/polymer/platform.js"></script>
-    <script src="lib/polymer/polymer.js"></script>
 	<script type="text/javascript">
         window.addEventListener('HTMLImportsLoaded', function() {
             // all imports loaded

@@ -2,6 +2,7 @@
     "name":         "github-feed",
     "version":      "1.0.0",
     "dependencies": {
-        "jasmine": "latest"
+        "jasmine": "latest",
+        "polymer-platform": "latest"
     }
 }

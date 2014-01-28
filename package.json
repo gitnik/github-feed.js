@@ -4,6 +4,7 @@
     "devDependencies": {
         "grunt-cli":            "latest",
         "grunt":                "latest",
-        "grunt-contrib-uglify": "latest"
+        "grunt-contrib-uglify": "latest",
+        "grunt-contrib-cssmin": "latest"
     }
 }
