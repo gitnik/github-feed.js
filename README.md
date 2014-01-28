@@ -46,14 +46,7 @@ A [demo](http://technik.io) is available on my website
 	<div id="myContainer">
 	</div>
 
-    <script src="src/promise.js"></script>
-    <script src="src/events/functions.js"></script>
-    <script src="src/events/PushEvent.js"></script>
-    <script src="src/events/CreateEvent.js"></script>
-    <script src="src/events/IssueCommentEvent.js"></script>
-    <script src="src/events/WatchEvent.js"></script>
-    <script src="src/eventFactory.js"></script>
-    <script src="src/githubFeed.js"></script>
+    <script src="dist/githubFeed.min.js"></script>
 
     <script src="lib/polymer/platform.js"></script>
     <script src="lib/polymer/polymer.js"></script>
@@ -72,5 +65,6 @@ A [demo](http://technik.io) is available on my website
 	</script>
 </body>
 </html>
+
 
 

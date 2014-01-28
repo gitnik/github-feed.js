@@ -1,16 +1,16 @@
 {
-    "name": "github-feed",
-    "version": "1.0.0",
-    "dependencies": {
-        "jasmine": "latest",
-    },
-    "homepage": "https://github.com/gitnik/github-feed.js",
-    "_release": "1.0.0",
-    "_resolution": {
-        "type": "version",
-        "tag": "1.0.0",
-        "commit": "ad64206a514f0d0e2cd93ae01c6deff1f97d479c"
-    },
-    "_source": "git://github.com/gitnik/github-feed.js",
-    "_target": "*"
+  "name": "github-feed",
+  "dependencies": {
+    "jasmine": "latest"
+  },
+  "homepage": "https://github.com/gitnik/github-feed.js",
+  "_release": "01c1b4d688",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "01c1b4d6882643e4504b75d62184a82fe4d1ca6a"
+  },
+  "_source": "git://github.com/gitnik/github-feed.js.git",
+  "_target": "*",
+  "_originalSource": "github-feed"
 }
