@@ -1,0 +1,57 @@
+<div id="CreateEvent-tmpl">
+    <h5>
+        <small>
+            <div class="time">{{=date}}</div>
+        </small>
+    </h5>
+    <div class="msg">
+        {{ if( payloadRefType == "branch") { }}
+        <a href="{{=userUrl}}">{{=user}}</a> created branch <a href="{{=branchUrl}}">{{=branch}}</a>
+        at <a href="{{=repoUrl}}">{{=repo}}</a>
+        {{ } else if(payloadRefType == "repository") { }}
+        <a href="{{=userUrl}}">{{=user}}</a> created repository <a href="{{=repoUrl}}">{{=repo}}</a>
+        {{ } }}
+    </div>
+</div>
+
+<div id="IssueCommentEvent-tmpl">
+    <h5>
+        <small>
+            <div class="time">{{=date}}</div>
+        </small>
+    </h5>
+    <div class="msg">
+        <a href="{{=userUrl}}">{{=user}}</a> commented on <a href="{{=issueUrl}}">{{=issue}}</a>
+    </div>
+    <div class="issueCommentTmpl">
+        <a href="{{=commentUrl}}">{{=comment}}</a>
+    </div>
+</div>
+
+<div id="PushEvent-tmpl">
+    <h5>
+        <small>
+            <div class="time">{{=date}}</div>
+        </small>
+    </h5>
+    <div class="msg">
+        <a href="{{=userUrl}}">{{=user}}</a> pushed to
+        <a href="{{=refUrl}}">{{=ref}}</a> at <a href="{{=repoUrl}}">{{=repo}}</a>
+    </div>
+    <div class="commitTmpl">
+        {{=commits}}
+    </div>
+</div>
+</div>
+
+<div id="WatchEvent-tmpl">
+    <h5>
+        <small>
+            <div class="time">{{=date}}</div>
+        </small>
+    </h5>
+    <div class="msg">
+        <a href="{{=userUrl}}">{{=user}}</a> starred <a href="{{=repoUrl}}">{{=repo}}</a>
+    </div>
+
+</div>

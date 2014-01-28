@@ -6,18 +6,24 @@ function EventFactory(eventData, config)
 
 EventFactory.prototype.getTemplate = function()
 {
-    var event = this.getEventDataByType();
+    var event = this._getEventDataByType();
     var element = document.createElement('div');
-    var template = document.getElementById(event.type + "-tmpl").textContent;
+    var template = this._getTemplateHtmlFromLink(event.type);
 
     element.id = event['type'];
     element.className = this.config.containerClasses.join(" ");
-    element.innerHTML = this.getCompiledTemplate(template, event);
+    element.innerHTML = this._getCompiledTemplate(template, event);
 
     return element;
 }
 
-EventFactory.prototype.getCompiledTemplate = function(template, event) {
+EventFactory.prototype._getTemplateHtmlFromLink = function(templateId) {
+    var link = document.querySelector('link[rel="import"]');
+    var content = link.import;
+    return content.querySelector('#' + templateId + "-tmpl").innerHTML;
+}
+
+EventFactory.prototype._getCompiledTemplate = function(template, event) {
 
     // taken from http://ejohn.org/blog/javascript-micro-templating
     var fn = new Function("obj",
@@ -40,7 +46,7 @@ EventFactory.prototype.getCompiledTemplate = function(template, event) {
     return fn(event);;
 }
 
-EventFactory.prototype.getEventDataByType = function() {
+EventFactory.prototype._getEventDataByType = function() {
     var type = this.eventData.type;
     var event = new window[type](this.eventData, this.config); // dynamic class loading
     return event.getData();

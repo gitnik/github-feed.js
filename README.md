@@ -3,14 +3,7 @@ github-feed.js
 
 A simple and pretty small script that fetches a users github activity feed and outputs it.
 
-Key features are:
-* highly customizable
-* no dependencies (expect for parts of [promise.js](https://github.com/stackp/promisejs), which are included)
-* speed (thanks to caching and script templates)
-
-
-A [demo](https://justnik.io) is available on my website
-
+A [demo](http://technik.io) is available on my website
 
 ### getting the script running
 ```html
@@ -45,51 +38,15 @@ A [demo](https://justnik.io) is available on my website
   			width: 200px;
   		 }
   	</style>
+
+    <link rel="import" href="templates.html">
   	<title>github feed</title>
 </head>
 <body>
 	<div id="myContainer">
 	</div>
 
-
-	<script type="text/html" id="PushEvent-tmpl">
-        <h5><small><div class="time">{{=date}}</div></small></h5>
-        <div class="msg">
-            <a href="{{=userUrl}}">{{=user}}</a> pushed to
-            <a href="{{=refUrl}}">{{=ref}}</a> at <a href="{{=repoUrl}}">{{=repo}}</a>
-        </div>
-        <div class="commitTmpl">
-            {{=commits}}
-        </div>
-    </script>
-    <script type="text/html" id="CreateEvent-tmpl">
-        <h5><small><div class="time">{{=date}}</div></small></h5>
-        <div class="msg">
-            {{ if( payloadRefType == "branch") { }}
-                <a href="{{=userUrl}}">{{=user}}</a> created branch <a href="{{=branchUrl}}">{{=branch}}</a>
-                at <a href="{{=repoUrl}}">{{=repo}}</a>
-            {{ } else if(payloadRefType == "repository") { }}
-                <a href="{{=userUrl}}">{{=user}}</a> created repository <a href="{{=repoUrl}}">{{=repo}}</a>
-            {{ } }}
-
-        </div>
-    </script>
-    <script type="text/html" id="IssueCommentEvent-tmpl">
-        <h5><small><div class="time">{{=date}}</div></small></h5>
-        <div class="msg">
-            <a href="{{=userUrl}}">{{=user}}</a> commented on <a href="{{=issueUrl}}">{{=issue}}</a>
-        </div>
-        <div class="issueCommentTmpl">
-            <a href="{{=commentUrl}}">{{=comment}}</a>
-        </div>
-    </script>
-    <script type="text/html" id="WatchEvent-tmpl">
-        <h5><small><div class="time">{{=date}}</div></small></h5>
-        <div class="msg">
-            <a href="{{=userUrl}}">{{=user}}</a> starred <a href="{{=repoUrl}}">{{=repo}}</a>
-        </div>
-    </script>
-	<script src="src/promise.js"></script>
+    <script src="src/promise.js"></script>
     <script src="src/events/functions.js"></script>
     <script src="src/events/PushEvent.js"></script>
     <script src="src/events/CreateEvent.js"></script>
@@ -97,16 +54,23 @@ A [demo](https://justnik.io) is available on my website
     <script src="src/events/WatchEvent.js"></script>
     <script src="src/eventFactory.js"></script>
     <script src="src/githubFeed.js"></script>
-	<script type="text/javascript">
-		var options = {
-			user: 'gitnik',
-			numberOfEvents: 10,
-			container: 'myContainer',
-			containerClasses: ["panel"]
-		};
 
-		GITHUB.FEED(options);
+    <script src="lib/polymer/platform.js"></script>
+    <script src="lib/polymer/polymer.js"></script>
+	<script type="text/javascript">
+        window.addEventListener('HTMLImportsLoaded', function() {
+            // all imports loaded
+            var options = {
+                "user": 'gitnik',
+                "numberOfEvents": 10,
+                "container": 'myContainer',
+                "containerClasses": ["panel"]
+            };
+
+            new GithubFeed(options);
+        });
 	</script>
 </body>
 </html>
+
 
