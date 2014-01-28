@@ -41,6 +41,8 @@ GithubFeed.prototype._prepareConfig = function (options) {
 
 GithubFeed.prototype._getFeed = function () {
 
+    var self = this;
+
     var promise = new Promise();
 
     // check if the json data was loaded before and if so, return it right away
@@ -54,11 +56,11 @@ GithubFeed.prototype._getFeed = function () {
     // ajax without jQuery. Yes, it DOES exist
     this._ajax(feed_url, 'json',
         function (feed) {
-            this._putFeedInCache(feed);
+            self._putFeedInCache(feed);
             promise.resolve(JSON.parse(feed));
         }, function (errorMessage, errorThrown) {
             // if the ajax request fails, pass it down to the (global) error handler
-            this._errorHandler(errorMessage, errorThrown);
+            self._errorHandler(errorMessage, errorThrown);
         });
 
     return promise;
@@ -71,7 +73,7 @@ GithubFeed.prototype._feedInCache = function () {
     }
 
     // if the the cached feed is older than "this._config.cacheTime()", we'll return false and reload it from github
-    if (JSON.parse(localStorage["feed_" + this._config.user])[0].fetched_at + this._config.cacheTime() * 1000 > Date.now()) {
+    if ((JSON.parse(localStorage["feed_" + this._config.user])[0].fetched_at + this._config.cacheTime() * 1000) > Date.now()) {
         // feed is too old
         return false;
     }
